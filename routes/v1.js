@@ -21,6 +21,63 @@ router.get('/link', function(req, res, next) {
         else {
             // console.log(body)
             var $ = cheerio.load(body);
+
+            if(url.indexOf("weixin.qq.com") < 0 ) 
+            {  
+
+                $(".dvtitle").css({
+                    "padding": "1vw",
+                    "text-align": "center",
+                    "color": "white",
+                    "font-size": "x-large",
+                    "background-color": "rgb(215, 6, 6)"
+                })
+
+                $(".dvcontents").css({
+                    "width": "100%",
+                    "margin-top": "5%"
+                })
+
+                $(".dvcontents").css({
+                    "width": "100%",
+                    "margin-top": "5%"
+                })
+
+                $(".date-container").css({
+                    "margin-top": "5%",
+                    "text-align": "center"
+                })
+                $(".date").css({
+                    "padding": "1vw",
+                    "color": "#eb0a0a",
+                    "padding-bottom": "2vh",
+                    "margin-bottom": "2vh",
+                    "font-weight": "bold",
+                    "text-align": "center",
+                    "font-size": "large"
+                }) 
+                $(".dvming img, .dvcontents img").css({
+                    "width": "98%",
+                    "height": "auto"
+                })
+                $(".dvming").css({
+                    "text-align": "center"
+                })
+                $(".dvcontent").css({
+                    "padding": "2vw",
+                    "margin-top": "4vw",
+                    "text-indent": "35px"
+                })
+                var html = $("body").html();
+                html = html.replace(/body/g, 'div');
+                html = html.replace(/src="../g,'src="http://dxdj.o2odj.cn')
+
+                html = htmlDecode(html)
+                // console.log(html)
+                res.send(html)
+                return;
+            } 
+
             $("#activity-name").css({
                 "margin-bottom": "10px",
                 "line-height": "1.4",
@@ -47,6 +104,7 @@ router.get('/link', function(req, res, next) {
             // console.log(html)
             // html = html.replace(/<img/g, '<img style="max-width: 100%!important;box-sizing: border-box!important;-webkit-box-sizing: border-box!important;word-wrap: break-word!important;"');
             html = htmlDecode(html)
+            html = "<div style='position: relative;padding: 20px 15px 15px;background-color: #fff;'>"+html+"</div>"
             res.send(html)
         }
     })
