@@ -69,6 +69,8 @@ router.get('/link', function(req, res, next) {
                     "text-indent": "35px"
                 })
                 var html = $("body").html();
+                html = html.replace(/data-src/g, 'src');
+                html = html.replace(/section/g, 'div');
                 html = html.replace(/body/g, 'div');
                 html = html.replace(/src="../g,'src="http://dxdj.o2odj.cn')
 
