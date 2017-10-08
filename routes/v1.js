@@ -22,6 +22,9 @@ router.get('/link', function(req, res, next) {
             // console.log(body)
             var $ = cheerio.load(body);
 
+            var video = ""
+
+
             if(url.indexOf("weixin.qq.com") < 0 ) 
             {  
 
@@ -76,9 +79,16 @@ router.get('/link', function(req, res, next) {
 
                 html = htmlDecode(html)
                 // console.log(html)
-                res.send(html)
+                var data = {
+                    html : html,
+                    video:video
+                }
+                res.send(data)
+                // res.send(html)
                 return;
             } 
+
+            var video = $(".video_iframe").attr("data-src");
 
             $("#activity-name").css({
                 "margin-bottom": "10px",
@@ -107,7 +117,12 @@ router.get('/link', function(req, res, next) {
             // html = html.replace(/<img/g, '<img style="max-width: 100%!important;box-sizing: border-box!important;-webkit-box-sizing: border-box!important;word-wrap: break-word!important;"');
             html = htmlDecode(html)
             html = "<div style='position: relative;padding: 20px 15px 15px;background-color: #fff;'>"+html+"</div>"
-            res.send(html)
+            var data = {
+                html : html,
+                video:video
+            }
+            res.send(data)
+            // res.send(html)
         }
     })
 }) 
